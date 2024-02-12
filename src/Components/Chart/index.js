@@ -9,14 +9,13 @@ const Chart = () => {
 
     useEffect(() => {
         // setting up svg
-        const w = 400
+        const w = window.innerWidth * 0.9
         const h = 100
         const svg = d3.select(svgRef.current)
             .attr('width', w)
             .attr('height', h)
             .style('background-color', 'd3d3d3')
             .style('border', '1px solid black')
-            .style('margin', '10')
 
         // seting the scaling
         const xScale = d3.scaleLinear()
