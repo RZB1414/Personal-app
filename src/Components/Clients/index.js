@@ -9,6 +9,7 @@ import imgSlide3 from '../../img/img3.jpeg'
 import imgSlide4 from '../../img/img4.jpeg'
 
 const Clients = () => {
+
     return (
         <Swiper
             effect={'cards'}
@@ -16,6 +17,7 @@ const Clients = () => {
             modules={[EffectCards]}
             className="mySwiper"
             style={{ marginLeft: 20, marginRight: 0 }}
+            
             
         >
             <SwiperSlide>
