@@ -15,8 +15,7 @@ const Clients = () => {
             grabCursor={true}
             modules={[EffectCards]}
             className="mySwiper"
-            style={{ marginRight: 0, marginLeft: 20 }}
-            
+            style={{ marginLeft: 10, marginRight: 0 }}
         >
             <SwiperSlide>
                 <div className="card">
@@ -42,7 +41,6 @@ const Clients = () => {
                     <h3>Adriana Buiatti</h3>
                 </div>
             </SwiperSlide>
-
         </Swiper>
     )
 }
