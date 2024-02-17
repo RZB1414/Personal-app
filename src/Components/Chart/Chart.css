@@ -1,11 +1,21 @@
-.chart {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 100%;
-    height: 100%;
+/* FILEPATH: /c:/Users/rzbui/OneDrive/Documentos/Portfolio/Personal-app/personal/src/Components/Chart/Chart.css */
+.titulo {
     display: flex;
-    justify-content: center;
+    height: 100%;
+    width: 100%;
     align-items: center;
-    background-color: #fff;
-    border-radius: 10px;
+    justify-content: center;
 }
+
+.titulo-texto {
+    font-size: small;
+    font-style: italic;
+    color: #ccc;
+}
+
+.chart {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+

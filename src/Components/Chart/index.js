@@ -1,49 +1,82 @@
-import { useEffect, useState, useRef } from "react"
-import "./Chart.css"
-import * as d3 from 'd3'
+import * as d3 from "d3";
+import { motion } from "framer-motion";
+import './Chart.css';
+import { useEffect } from "react";
 
-const Chart = () => {
+export default function Chart({ entries }) {
 
-    const [data] = useState([25, 50, 35, 15, 94, 10])
-    const svgRef = useRef()
+  console.log(entries)
 
-    useEffect(() => {
-        // setting up svg
-        const w = window.innerWidth * 0.9
-        const h = 100
-        const svg = d3.select(svgRef.current)
-            .attr('width', w)
-            .attr('height', h)
-            .style('background-color', 'd3d3d3')
-            .style('border', '1px solid black')
+  useEffect(() => {
+    const margin = { top: 20, right: 20, bottom: 30, left: 50 };
+    const width = 600 - margin.left - margin.right;
+    const height = 200 - margin.top - margin.bottom;
 
-        // seting the scaling
-        const xScale = d3.scaleLinear()
-            .domain([0, data.length - 1])
-            .range([0, w])
-        const yScale = d3.scaleLinear()
-            .domain([0, h])
-            .range([h, 0])
-        const generateScaledLine = d3.line()
-            .x((d, i) => xScale(i))
-            .y(yScale)
-            .curve(d3.curveCardinal)
+    const x = d3.scaleBand()
+      .range([0, width])
+      .padding(0.1)      
 
-        // setting up the data for the svg
-        svg.selectAll('.line')
-            .data([data])
-            .join('path')
-            .attr('d', d => generateScaledLine(d))
-            .attr('fill', 'none')
-            .attr('stroke', 'black')
+    const y = d3.scaleLinear()
+      .range([height, 0]);
 
-    }, [data])
+    const line = d3.line()
+      .x(entry => x(entry.date) + x.bandwidth() / 2)
+      .y(entry => y(entry.weight));
 
-    return (
-        <div className="chart">
-            <svg ref={svgRef}></svg>
-        </div>
-    )
+    const svg = d3.select(".chart")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    x.domain(entries.map(entry => entry.date));
+    y.domain([0, d3.max(entries, entry => entry.weight)]);
+
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%d/%m")))
+
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    svg.append("path")
+      .datum(entries)
+      .attr("class", "line")
+      .attr("d", line)
+      .attr("fill", "none")
+      .attr("stroke", "black")
+      .attr("stroke-width", 3)
+      .attr("stroke-dasharray", function() {
+        const length = this.getTotalLength();
+        return length + " " + length;
+      })
+      .attr("stroke-dashoffset", function() {
+        const length = this.getTotalLength();
+        return length;
+      })
+      .transition()
+      .duration(1500)
+      .attr("stroke-dashoffset", 0);
+
+    svg.selectAll(".dot")
+      .data(entries)
+      .enter().append("circle")
+      .attr("class", "dot")
+      .attr("cx", entry => x(entry.date) + x.bandwidth() / 2)
+      .attr("cy", entry => y(entry.weight))
+      .attr("r", 6)
+      .attr("fill", "black")      
+    
+  }, [entries])
+
+  return (
+    <motion.svg
+      className="chart"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    />
+  )
 }
-
-export default Chart
