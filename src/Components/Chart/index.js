@@ -29,54 +29,62 @@ export default function Chart({ entries }) {
       .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
       .attr("preserveAspectRatio", "xMidYMid meet")
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      
 
     x.domain(entries.map(entry => entry.date));
-    y.domain([0, d3.max(entries, entry => entry.weight)]);
+
+    const minValue = d3.min(entries, entry => entry.weight);
+    const maxValue = d3.max(entries, entry => entry.weight);
+    const marginValue = 5;
+    y.domain([minValue - marginValue, maxValue]);
 
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%d/%m")))
+      .attr("color", "#39B0FF")
 
     svg.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y).ticks(5))
+      
 
     svg.append("path")
       .datum(entries)
       .attr("class", "line")
       .attr("d", line)
       .attr("fill", "none")
-      .attr("stroke", "black")
+      .attr("stroke", "#39B0FF")
       .attr("stroke-width", 3)
-      .attr("stroke-dasharray", function() {
-        const length = this.getTotalLength();
-        return length + " " + length;
-      })
-      .attr("stroke-dashoffset", function() {
-        const length = this.getTotalLength();
-        return length;
-      })
-      .transition()
-      .duration(1500)
-      .attr("stroke-dashoffset", 0);
+      
+            .attr("stroke-dasharray", function() {
+              const length = this.getTotalLength();
+              return length + " " + length;
+            })
+            .attr("stroke-dashoffset", function() {
+              const length = this.getTotalLength();
+              return length;
+            })
+            .transition()
+            .duration(1500)
+            .attr("stroke-dashoffset", 0);
 
-    svg.selectAll(".dot")
-      .data(entries)
-      .enter().append("circle")
-      .attr("class", "dot")
-      .attr("cx", entry => x(entry.date) + x.bandwidth() / 2)
-      .attr("cy", entry => y(entry.weight))
-      .attr("r", 6)
-      .attr("fill", "black")      
-    
-  }, [entries])
+          svg.selectAll(".dot")
+            .data(entries)
+            .enter().append("circle")
+            .attr("class", "dot")
+            .attr("cx", entry => x(entry.date) + x.bandwidth() / 2)
+            .attr("cy", entry => y(entry.weight))
+            .attr("r", 6)
+            .attr("fill", "#39B0FF")
+            
+        }, [entries])
 
-  return (
-    <motion.svg
-      className="chart"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    />
-  )
-}
+        return (
+          <motion.svg
+            className="chart"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          />
+        )
+      }
