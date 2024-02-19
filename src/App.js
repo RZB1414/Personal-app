@@ -1,6 +1,6 @@
 import './App.css';
-// import Header from './Components/Header'
-// import Clients from './Components/Clients';
+import Header from './Components/Header'
+import Clients from './Components/Clients';
 import Chart from './Components/Chart';
 
 function App() {
@@ -22,8 +22,8 @@ function App() {
 
   return (
     <div className="home-home">
-      {/* <Header />
-      <Clients /> */}
+      <Header />
+      <Clients />
       <Chart entries={entries} />
     </div>
   )

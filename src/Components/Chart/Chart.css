@@ -1,4 +1,3 @@
-/* FILEPATH: /c:/Users/rzbui/OneDrive/Documentos/Portfolio/Personal-app/personal/src/Components/Chart/Chart.css */
 .titulo {
     display: flex;
     height: 100%;
@@ -14,8 +13,6 @@
 }
 
 .chart {
-    position: relative;
-    height: 100%;
-    width: 100%;
+    
 }
 

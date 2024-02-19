@@ -46,7 +46,7 @@ export default function Chart({ entries }) {
 
     svg.append("g")
       .call(d3.axisLeft(y).ticks(5))
-      
+      .attr("color", "#39B0FF")
 
     svg.append("path")
       .datum(entries)
