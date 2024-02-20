@@ -1,7 +1,8 @@
 import './App.css';
 import Header from './Components/Header'
 import Clients from './Components/Clients';
-import Chart from './Components/Chart';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Footer from './Components/Footer';
 
 function App() {
 
@@ -21,11 +22,18 @@ function App() {
   ]
 
   return (
-    <div className="home-home">
+    <>
+    <BrowserRouter>
       <Header />
-      <Clients />
-      <Chart entries={entries} />
-    </div>
+      <Routes>
+        <Route path='/' element={<p>Home</p>} />
+        <Route path='/clients' element={<Clients entries={entries} />} />
+        <Route path='/info' element={<p>Info</p>} />
+        <Route path='*' element={<p>Not Found</p>} />
+      </Routes>
+    </BrowserRouter>
+    <Footer />
+    </>
   )
 }
 

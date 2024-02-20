@@ -1,12 +1,19 @@
+import MenuLink from '../../MenuLink'
 import './Header.css'
 
 const Header = () => {
     return (
-        <div className="cabecalho">
-            <a href="*" className="header-item">Home</a>
-            <a href="*" className="header-item">Clients</a>
-            <a href="*" className="header-item">Info</a>
-        </div>
+        <header className="cabecalho">
+            <MenuLink to={'/'} >
+                Home
+            </MenuLink>
+            <MenuLink to={'/clients'} >
+                Clients
+            </MenuLink>
+            <MenuLink to={'/info'} >
+                Info
+            </MenuLink>
+        </header>
     )
 }
 
