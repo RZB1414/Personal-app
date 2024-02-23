@@ -2,9 +2,8 @@
       width: 79%;
     }
 
-    img {
+    .image {
       width: 100%;
-      object-fit: cover;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
@@ -16,6 +15,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      text-decoration: none;
+      color: black;
     }
 
     h3 {

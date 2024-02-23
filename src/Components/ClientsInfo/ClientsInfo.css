@@ -1,0 +1,24 @@
+.cliente {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.info-cliente {
+    display: flex;
+}
+
+.box-img{
+    margin: 10px;
+    width: 25%;
+}
+
+.img-cliente {
+    width: 100%;
+}
+
+.nome-cliente {
+    font-size: 1.5em;
+}

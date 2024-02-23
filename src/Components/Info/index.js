@@ -3,7 +3,10 @@ import './Info.css'
 
 const Info = () => {
     return(
-        <Footer />
+        <>
+            <h1>Info</h1>
+            <Footer />
+        </>
     )
 }
 

@@ -1,9 +1,10 @@
 import './App.css';
-import Header from './Components/Header'
 import Clients from './Components/Clients';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Components/Home';
+import Header from './Components/Header';
 import Info from './Components/Info';
+import ClientsInfo from './Components/ClientsInfo';
 
 function App() {
 
@@ -23,17 +24,16 @@ function App() {
   ]
 
   return (
-    <>
-    <BrowserRouter>
+      <BrowserRouter>
       <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/clients' element={<Clients entries={entries} />} />
-        <Route path='/info' element={<Info />} />
-        <Route path='*' element={<p>Not Found</p>} />
-      </Routes>
-    </BrowserRouter>
-    </>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/clients' element={<Clients entries={entries} />} />
+          <Route path='/info' element={<Info />} />
+          <Route path='/clients/:id' element={<ClientsInfo />} />
+          <Route path='*' element={<p>Not Found</p>} />
+        </Routes>
+      </BrowserRouter>
   )
 }
 

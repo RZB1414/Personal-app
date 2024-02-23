@@ -3,7 +3,10 @@ import Footer from '../Footer'
 
 const Home = () => {
     return(
-        <Footer />
+        <>
+            <h1>Home</h1>
+            <Footer />
+        </>
     )
 }
 
