@@ -5,10 +5,12 @@ import 'swiper/css/effect-cards';
 import { EffectCards } from 'swiper/modules';
 import clients from '../../json/clients.json';
 import { Link } from 'react-router-dom';
+import Footer from '../Footer';
 
 const Clients = () => {
 
     return (
+        <>
         <Swiper
             effect={'cards'}
             grabCursor={true}
@@ -27,6 +29,8 @@ const Clients = () => {
                 )
             })}
         </Swiper>
+        <Footer />
+        </>
     )
 }
 
