@@ -1,0 +1,11 @@
+.prgbar {
+    width: 90%;
+    margin: 10px auto;
+}
+
+p {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+}

@@ -3,11 +3,23 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 import { EffectCards } from 'swiper/modules';
-import clients from '../../json/clients.json';
+import { getClients } from '../../servicos/clients';
 import { Link } from 'react-router-dom';
-import Footer from '../Footer';
+import Footer from '../../Components/Footer';
+import { useEffect, useState } from 'react';
 
 const Clients = () => {
+
+    const [clients, setClients] = useState([])
+
+    async function fetchClients() {
+        const clientsAPI = await getClients()
+        setClients(clientsAPI)
+    }
+
+    useEffect(() => {
+        fetchClients()
+    }, [clients])
 
     return (
         <>

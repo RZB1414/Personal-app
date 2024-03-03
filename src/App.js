@@ -1,10 +1,10 @@
 import './App.css';
-import Clients from './Components/Clients';
+import Clients from './rotas/Clients';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Components/Home';
+import Home from './rotas/Home';
 import Header from './Components/Header';
-import Info from './Components/Info';
-import ClientsInfo from './Components/ClientsInfo';
+import Info from './rotas/Info';
+import ClientsInfo from './rotas/ClientsInfo';
 
 function App() {
 
