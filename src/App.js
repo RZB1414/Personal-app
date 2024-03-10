@@ -8,6 +8,8 @@ import ClientsInfo from './rotas/ClientsInfo';
 
 function App() {
 
+  // const activeIndex = 1
+
   const entries = [
     { date: new Date("2022-01-01"), weight: 100 },
     { date: new Date("2022-01-05"), weight: 140 },

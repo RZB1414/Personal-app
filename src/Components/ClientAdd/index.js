@@ -1,16 +1,17 @@
 import { useState } from 'react'
-import './ClientEdit.css'
-import { deleteClient, patchClient } from '../../servicos/clients'
-import { Link } from 'react-router-dom'
+import './ClientAdd.css'
+import { getClients, postClient } from '../../servicos/clients'
 
-const ClientEdit = ({ client, setIsChanging }) => {
+const ClientAdd = ({ setIsAdding }) => {
 
-    const [name, setName] = useState(client.name)
-    const [lastName, setLastName] = useState(client.lastName)
-    const [objective, setObjective] = useState(client.objective)
-    const [phone, setPhone] = useState(client.phone)
-    const [email, setEmail] = useState(client.email)
-    const [address, setAddress] = useState(client.address)
+    const [id, setId] = useState('')
+    const [name, setName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [objective, setObjective] = useState('')
+    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
+    const [address, setAddress] = useState('')
+
 
     function handleChangeName(e) {
         setName(e.target.value)
@@ -36,40 +37,26 @@ const ClientEdit = ({ client, setIsChanging }) => {
         setAddress(e.target.value)
     }
 
-    const editedClient = { name, lastName, objective, phone, email, address }
+    const clientAdded = { id, name, lastName, objective, phone, email, address }
+
+    async function addID() {
+        try {
+            const clientsAPI = await getClients()
+            const client = clientsAPI.map(client => parseInt(client.id))
+            const maxId = Math.max(...client)
+            const newId = maxId + 1
+            const newIdString = newId.toString()
+            setId(newIdString)
+            clientAdded.id = newIdString
+            postClient(clientAdded)
+        } catch (error) {
+            console.error("Error occurred while generating ID:", error)
+        }
+    }
 
     return (
         <div className='edit'>
-            <div className='header'>
-                <h1>Edit Client</h1>
-
-                <Link to='/clients'
-                    onClick={() => {
-                        if (window.confirm('Are you sure you want to delete this client?')) {
-                            deleteClient(client.id)
-                            .then((res) => {
-                                const message = document.createElement('p')
-                                message.innerText = "Client deleted successfully!"
-                                message.style.position = 'fixed'
-                                message.style.top = '50%'
-                                message.style.left = '50%'
-                                message.style.transform = 'translate(-50%, -50%)'
-                                message.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
-                                message.style.color = 'white'
-                                message.style.padding = '10px'
-                                message.style.borderRadius = '5px'
-                                message.style.zIndex = '9999'
-                                document.body.appendChild(message)
-                                setTimeout(() => {
-                                    document.body.removeChild(message)
-                                }, 3000)
-                            })
-                        }
-                    }}
-                    className='delete-btn-link' >
-                    <img src='/assets/svg-icons/delete-btn.svg' alt='delete' className='delete-btn'/>
-                </Link>
-            </div>
+            <h1>Add Client</h1>
             <form className='edit-info'>
 
                 <div className='info-details-box'>
@@ -144,16 +131,16 @@ const ClientEdit = ({ client, setIsChanging }) => {
                         className='btn'
                         onClick={(e) => {
                             e.preventDefault()
-                            patchClient(client.id, editedClient)
-                            setIsChanging(false)
+                            addID()
+                            setIsAdding(false)
                         }}
-                    >Save</button>
+                    >Add</button>
 
                     <button
                         className='btn'
                         onClick={(e) => {
                             e.preventDefault()
-                            setIsChanging(false)
+                            setIsAdding(false)
                         }}
                     >Cancel</button>
                 </div>
@@ -162,4 +149,4 @@ const ClientEdit = ({ client, setIsChanging }) => {
     )
 }
 
-export default ClientEdit
+export default ClientAdd

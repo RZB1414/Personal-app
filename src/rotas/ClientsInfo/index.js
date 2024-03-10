@@ -8,7 +8,7 @@ import ClientEdit from '../../Components/ClientEdit';
 const ClientsInfo = () => {
 
     const [clients, setClients] = useState([])
-    const [isEditing, setIsEditing] = useState(false)
+    const [isChanging, setIsChanging] = useState(false)
 
     async function fetchClients() {
         const clientsAPI = await getClients()
@@ -30,13 +30,13 @@ const ClientsInfo = () => {
     }
 
     const handleEditClickTrue = () => {
-        setIsEditing(true)
+        setIsChanging(true)
     }
 
     return (
         <>
-            {isEditing ?
-                <ClientEdit client={client} setIsEditing={setIsEditing} />
+            {isChanging ?
+                <ClientEdit client={client} setIsChanging={setIsChanging} />
                 :
                 <>
                     <div className='cliente'>
@@ -68,9 +68,17 @@ const ClientsInfo = () => {
 
                             </div>
                         </div>
-                    </div>
-                    <div className='box-btn'>
-                        <button className='btn' onClick={handleEditClickTrue}>Edit</button>
+                            <div className='box-btn'>
+                                <button className='btn' onClick={handleEditClickTrue}>Edit</button>
+                                <button to='/clients'
+                                    className='btn'
+                                    onClick={() => {
+                                        console.log("Backing")
+                                        }}
+                                    >
+                                    Back
+                                </button>
+                            </div>
                     </div>
                 </>
             }

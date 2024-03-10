@@ -6,8 +6,6 @@
     flex-direction: column;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
-    background-color: white;
-    /* background-color: #2c3e50; */
 }
 
 .info-cliente {
@@ -29,13 +27,14 @@
 .nome-cliente {
     font-size: 1.5em;
     margin: 15px;
-    color: black;
+    color: white;
 }
 
 .box-btn {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 100%;
+    
 
 }
 
@@ -43,19 +42,18 @@
     width: 30%;
     margin: 10px;
     padding: 10px;
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
+    box-shadow: 0px 0px 7px rgba(8, 1, 18, 0.5);
     border-radius: 5px;
-    cursor: pointer;
+    font-weight: 600;
+    color: white;
 }
 
 .info-details {
     width: 100%;
-    color: black;
+    color: white;
     margin: 10px;
     padding: 5px;
     box-shadow: 0px 0px 7px rgba(8, 1, 18, 0.5);
-    /* box-shadow: 0px 0px 5px rgba(247, 249, 249, 0.5); */
 }
 
 .box-info {
