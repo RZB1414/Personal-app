@@ -122,6 +122,7 @@ const ClientAdd = ({ setIsAdding }) => {
                         value={address}
                         onChange={handleChangeAddress}
                         placeholder='Address'
+                        onClick={(e) => e.stopPropagation()}
                     />
                 </div>
 

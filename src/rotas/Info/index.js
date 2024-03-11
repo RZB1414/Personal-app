@@ -1,10 +1,11 @@
+import Exercises from '../../Components/Exercises'
 import Footer from '../../Components/Footer'
 import './Info.css'
 
 const Info = () => {
     return(
         <>
-            <h1>Info</h1>
+            <Exercises />
             <Footer />
         </>
     )
